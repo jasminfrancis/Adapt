@@ -3,6 +3,8 @@ package com.student.demo.repository;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -13,15 +15,17 @@ import com.student.demo.constant.ConstantValues;
 import com.student.demo.dto.UserEntity;
 import com.student.demo.entity.User;
 import com.student.demo.mapper.UserMapper;
+import com.student.demo.service.StudentService;
 
 @Component
 @Qualifier("studentDao")
 public class StudentDaoImpl implements StudentDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
+	private static final Logger logger=LoggerFactory.getLogger(StudentDaoImpl.class);
 	@Override
 	public int addStudent(User student) {
+		logger.info("###addStudent Dao###");
 		try {
 			int status = 0;	
 			if (student.getId() > 0) {
@@ -31,7 +35,7 @@ public class StudentDaoImpl implements StudentDao {
 						+ "role=?, user_name=? WHERE id=?";
 				status = jdbcTemplate.update(sql, student.getPassword(), student.getFirstName(), student.getLastName(),
 						student.getRole(),student.getUserName(), student.getId());
-
+				logger.info("###addStudent Updated###");
 			} else {
 				//Insert
 				student.setRole(ConstantValues.STUDENT);
@@ -40,7 +44,7 @@ public class StudentDaoImpl implements StudentDao {
 				String query = "INSERT INTO tbl_user(password,first_name,last_name,role,user_name) VALUES(?,?,?,?,?)";
 				status = jdbcTemplate.update(query, student.getPassword(), student.getFirstName(),
 						student.getLastName(), student.getRole(), student.getUserName());
-
+				logger.info("###addStudent inserted###");
 			}
 			return status;
 		} catch (Exception e) {
@@ -72,10 +76,12 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public int deleteStudent(int id) {
+		logger.info("###deleteStudent dao###");
 		int status=0;
 		try {
 			String query="DELETE from tbl_user where id=?";	
 			status=jdbcTemplate.update(query,id);
+			logger.info("###deleteStudent dao success###");
 			return status;
 		}catch(Exception e) {
 			return status;
@@ -85,12 +91,10 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public User loginUser(User student) {
+		logger.info("###loginUser dao###");
 		String query="SELECT * from tbl_user where user_name=? and password=?";
 		try {
-			//student= JdbcTemplate.queryForObject("SELECT * FROM tbl_student WHERE id=?", new BeanPropertyRowMapper<Student>(Student.class), student.getUserName(),student.getPassword());	   
 			student= jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<User>(User.class), student.getUserName(),student.getPassword());	   
-			//student= jdbcTemplate.queryForObject(query, new Object[] { student.getUserName(),student.getPassword()},Student.class);	   
-			
 			return student;
 		}catch(Exception e) {
 			return null;
@@ -100,6 +104,7 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public List<UserEntity> findAllStudents(int roleId) {
+		logger.info("###findAllStudents dao###");
 		String query="select s.id,s.password,s.user_name,s.role,s.first_name,s.last_name,r.role_name from tbl_user s left join tbl_role r on r.id=s.role where s.role=?";
 		List<UserEntity> list=jdbcTemplate.query(query,new UserMapper(),roleId);
 		return list;

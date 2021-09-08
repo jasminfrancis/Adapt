@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.student.demo.constant.ConstantValues;
 import com.student.demo.constant.ResponseCode;
 import com.student.demo.constant.ResponseDescription;
 import com.student.demo.constant.ResponseEntity;
@@ -37,6 +38,7 @@ public class StudentServiceImpl implements StudentService {
 		}		
 		return response;
 	}
+	
 	@Override
 	public ResponseEntity<?> listStudent() {
 		ResponseEntity<?> response=null;
@@ -52,6 +54,7 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public ResponseEntity<?> deleteStudent(int id) {
+		logger.info("###deleteStudent service layer############"+id);
 		ResponseEntity<?> response=null;
 		if(id!=0) {
 			User checkExistence=studentDao.findById(id);
@@ -72,31 +75,26 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public ResponseEntity<?> loginUser(User student) {
+		logger.info("#######loginUser service############");
 		ResponseEntity<?> response=null;
-		String requestPassword=student.getPassword();
-		
+		String requestPassword=student.getPassword();	
 	    User userNameCheck=studentDao.loginUserName(student);
-	   
-	    System.out.println("userNameCheck="+userNameCheck);
-	   
 	    if(userNameCheck!=null) {
-
-		    String decryptedPassword = PasswordEncription.Decription(userNameCheck.getPassword());
-		    System.out.println(decryptedPassword);
+		    String decryptedPassword = PasswordEncription.Decription(userNameCheck.getPassword());	    
 		    if(requestPassword.equals(decryptedPassword)) {
 		    	response=new ResponseEntity<>( ResponseCode.SUCCESS, ResponseMessage.LOGIN_SUCCESS,ResponseDescription.LOGIN_SUCCESS,userNameCheck);
 		    }else {
 		    	response=new ResponseEntity<>( ResponseCode.FAILED, ResponseMessage.LOGIN_FAILED,ResponseDescription.LOGIN_FAILED,userNameCheck);
 		    }
 	    } else
-			response=new ResponseEntity<>( ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND,ResponseDescription.NOT_FOUND);
-		
+			response=new ResponseEntity<>( ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND,ResponseDescription.NOT_FOUND);		
 		return response;
 	}
 	@Override
 	public ResponseEntity<?> listStudents() {
+		logger.info("#######studentList############");
 		ResponseEntity<?> response=null;
-		List<UserEntity> userList=studentDao.findAllStudents(2);
+		List<UserEntity> userList=studentDao.findAllStudents(ConstantValues.STUDENT);
 		if(!userList.isEmpty()) {
 			response=new ResponseEntity<>( ResponseCode.SUCCESS, ResponseMessage.LIST_DATA,ResponseDescription.LIST_DATA,userList);
 		}else {

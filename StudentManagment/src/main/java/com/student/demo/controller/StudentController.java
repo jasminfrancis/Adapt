@@ -40,52 +40,82 @@ public class StudentController {
 		return response;
 	}
 	
+	/**
+	 * This service used for getting studentlist without joining roles
+	 * Not used currently
+	 * @param student
+	 * @return
+	 */
 	@GetMapping("/listStudent" )
 	@ResponseBody
 	public ResponseEntity<?> listStudent(){
 		 ResponseEntity<?> response=studentService.listStudent();
 		return response;
 	}
-	
+	/**
+	 *This service redirect tp login view page
+	 * @return
+	 */
 	@GetMapping("/" )
 	public String home(){
-		
 		return "login";
 	}
-	
+	/**
+	 * This service is used for delete student
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/deleteStudent/{id}" )
 	@ResponseBody
 	public ResponseEntity<?> deleteStudent(@PathVariable int id){
+		logger.info("#######delete student###########");
 		 ResponseEntity<?> response=studentService.deleteStudent(id);
 		return response;
 	}
-	
+	/**
+	 * This service is used for login student and admin
+	 * @param student
+	 * @param redirectAttributes
+	 * @return
+	 */
 	@PostMapping("/login" )
 	@ResponseBody
 	public ResponseEntity<?> login(@RequestBody User student,RedirectAttributes redirectAttributes){
 		
-		 System.out.println("-----------------------");
+		logger.info("#######login############");
 		 ResponseEntity<?> response=studentService.loginUser(student);
 	        return response;
 	    
 	}
+	/**
+	 * Getting student.jsp view page
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/student" )
 	public String home1(Map<String, Object> model){
-		System.out.println("********************");
 		return "student";
 	}
+	/**
+	 * This service is used for getting view page welcome.jsp
+	 * @return
+	 */
 	@GetMapping("/welcome/{firstName}" )
 	public ModelAndView welcome(@PathVariable("firstName") String firstName){
-		System.out.println("********************");
+		logger.info("#######welcome############");
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("msg","Welcome  "+  firstName +",    You have successfully logged in");
 		mv.setViewName("welcome");
 		return mv;
 	}
-
-	@GetMapping("/listStudents" )
+/**
+ * This service is used for getting student List with mapping role table
+ * @return
+ */
+	@GetMapping("/studentList" )
 	@ResponseBody
-	public ResponseEntity<?> listStudents(){
+	public ResponseEntity<?> studentList(){
+		logger.info("#######studentList############");
 		 ResponseEntity<?> response=studentService.listStudents();
 		return response;
 	}
