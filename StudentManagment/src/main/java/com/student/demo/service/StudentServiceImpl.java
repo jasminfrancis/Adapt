@@ -2,7 +2,8 @@ package com.student.demo.service;
 
 import java.util.List;
 
-import org.jasypt.util.text.AES256TextEncryptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,23 +18,23 @@ import com.student.demo.utility.PasswordEncription;
 
 @Service("studentService")
 public class StudentServiceImpl implements StudentService {
-
+	private static final Logger logger=LoggerFactory.getLogger(StudentService.class);
+	
 	@Autowired 
 	StudentDao studentDao;
 	@Override
 	public ResponseEntity<?> addStudent(User student) {
+		logger.info("#####addStudent####");
 		ResponseEntity<?> response=null;
 		String password=student.getPassword();
 	    String myEncryptedPassword = PasswordEncription.Encription(password);
 	    student.setPassword(myEncryptedPassword);
-	    System.out.println(myEncryptedPassword ); 
 		int user=studentDao.addStudent(student);
 		if(user==1) {
 			response=new ResponseEntity<>( ResponseCode.SUCCESS, ResponseMessage.SAVE_DATA,ResponseDescription.SAVE_DATA,user);
 		}else {
 			response=new ResponseEntity<>( ResponseCode.FAILED, ResponseMessage.SAVE_FAILED,ResponseDescription.SAVE_FAILED,user);
-		}
-		
+		}		
 		return response;
 	}
 	@Override

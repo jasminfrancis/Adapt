@@ -27,6 +27,11 @@ public class StudentController {
     StudentService studentService;
 	private static final Logger logger=LoggerFactory.getLogger(StudentController.class);
 	
+	/**
+	 * This service used for creating and editing student
+	 * @param student
+	 * @return
+	 */
 	@PostMapping("/addStudent" )
 	@ResponseBody
 	public ResponseEntity<?> addStudent(@RequestBody User student){
