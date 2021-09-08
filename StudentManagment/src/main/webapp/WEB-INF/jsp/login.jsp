@@ -69,7 +69,7 @@ var user = {};
 		dataType : 'json',
 		success : function(data) {
 			if(data.status==200){
-				alert(data.message);
+				console.log(data.message);
 				console.log(data);
 				if(data.response.role==1){
 					window.location.href="/student";
