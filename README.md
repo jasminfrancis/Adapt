@@ -14,3 +14,7 @@ Student :2
 
 # Adapt Student Login
 Username  take from the database or student listing page available usernames 
+
+# Service Description
+ All the service use in any platform (web,mobile)
+
