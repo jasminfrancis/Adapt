@@ -17,4 +17,9 @@ Username  take from the database or student listing page available usernames
 
 # Service Description
  All the services we use in can any platform (web,mobile)
+ 
+ # Functionalities
+ 1. Admin can login  go to student management system page
+ 2. Admin can edit,delete ,update  Student
+ 3. Added Student can login redirect to welcome page
 
