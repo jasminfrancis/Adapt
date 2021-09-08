@@ -39,18 +39,7 @@ public class StudentServiceImpl implements StudentService {
 		return response;
 	}
 	
-	@Override
-	public ResponseEntity<?> listStudent() {
-		ResponseEntity<?> response=null;
-		
-		List<User> userList=studentDao.findAllStudents();
-		if(!userList.isEmpty()) {
-			response=new ResponseEntity<>( ResponseCode.SUCCESS, ResponseMessage.LIST_DATA,ResponseDescription.LIST_DATA,userList);
-		}else {
-			response=new ResponseEntity<>( ResponseCode.SUCCESS, ResponseMessage.RECORD_NOT_FOUND,ResponseDescription.RECORD_NOT_FOUND,userList);
-		}
-		return response;
-	}
+	
 	
 	@Override
 	public ResponseEntity<?> deleteStudent(int id) {

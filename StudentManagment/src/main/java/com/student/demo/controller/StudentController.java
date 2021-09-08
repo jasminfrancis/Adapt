@@ -40,18 +40,7 @@ public class StudentController {
 		return response;
 	}
 	
-	/**
-	 * This service used for getting studentlist without joining roles
-	 * Not used currently
-	 * @param student
-	 * @return
-	 */
-	@GetMapping("/listStudent" )
-	@ResponseBody
-	public ResponseEntity<?> listStudent(){
-		 ResponseEntity<?> response=studentService.listStudent();
-		return response;
-	}
+	
 	/**
 	 *This service redirect tp login view page
 	 * @return

@@ -9,9 +9,6 @@ public interface StudentDao {
 
 	int addStudent(User student);
 
-	List<User> findAllStudents();
-
-	
 	User findById(int id);
 
 	int deleteStudent(int id);

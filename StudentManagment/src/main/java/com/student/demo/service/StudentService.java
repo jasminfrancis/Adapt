@@ -7,10 +7,6 @@ public interface StudentService {
 
 	ResponseEntity<?> addStudent(User student);
 
-	ResponseEntity<?> listStudent();
-
-	
-
 	ResponseEntity<?> deleteStudent(int id);
 
 	ResponseEntity<?> loginUser(User student);
