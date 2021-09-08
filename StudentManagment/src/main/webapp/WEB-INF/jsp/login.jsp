@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,24 +11,23 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <form>
 	<table>
-		
+
 		<tr>
-<td>Username :</td>
+			<td>Username :</td>
 			<td><input type="test" id="userName" name="userName" /></td>
-		</tr>	
+		</tr>
 		<tr>
 			<td>Password :</td>
 			<td><input type="password" id="password" maxlength="100"
 				name="password" /></td>
 		</tr>
-		
-		
-	
+
+
+
 	</table>
-	 <input type="button" value="login"
-		id="loginButton" /> 
+	<input type="button" value="login" id="loginButton" />
 </form>
-<br/>
+<br />
 <div id="msg" style="color: red"></div>
 <div id="messge1" style="color: red"></div>
 
@@ -96,34 +95,6 @@ var user = {};
 		}
 	})
  })
-
- 
-
-
-
-/* function redirectMethod(){
-	$.ajax({
-		url : 'studentPage',
-		method : 'GET'
-		
-		//data: JSON.stringify(student),
-		contentType : "application/json;charset=UTF-8",
-		dataType : 'json',
-		success : function(data) {
-			//alert(data.message);	
-			//redirectMethod();
-		
-			
-		},
-		error : function(error) {
-			alert(error);
-		}
-	}) */
-//}
-
-
-
-	
 </script>
 </body>
 </html>

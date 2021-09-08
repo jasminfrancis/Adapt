@@ -11,6 +11,10 @@
 <body>
 <a href="/" style="margin: center;">Logout</a>
 <br>
-${msg}
+<h2>${msg}</h2>
+<img src="https://img.freepik.com/free-vector/group-students-school_52683-43231.jpg?size=626&ext=jpg
+"target="_blank">
+
+
 </body>
 </html>
