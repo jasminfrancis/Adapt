@@ -22,4 +22,6 @@ Username  take from the database or student listing page available usernames
  1. Admin can login  go to student management system page
  2. Admin can edit,delete ,update  Student
  3. Added Student can login redirect to welcome page
+# Table Structure
+Two tables created tbl_user and tbl_role
 
