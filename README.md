@@ -16,5 +16,5 @@ Student :2
 Username  take from the database or student listing page available usernames 
 
 # Service Description
- All the service use in any platform (web,mobile)
+ All the services we use in can any platform (web,mobile)
 
